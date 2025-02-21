@@ -1,5 +1,8 @@
+// Replace with your Netlify site URL
+const NETLIFY_URL = 'https://prismatic-sundae-41a872.netlify.app';
+
 // Base URL for API endpoints
-const API_BASE = '/.netlify/functions';  // Always use relative path
+const API_BASE = `${NETLIFY_URL}/.netlify/functions`;
 
 // Endpoints
 const SIGNUP_ENDPOINT = `${API_BASE}/signup`;
