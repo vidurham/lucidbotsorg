@@ -3,7 +3,7 @@ import { Bot, Brain, Users, ArrowRight, Lightbulb, Building2, GraduationCap, Hea
 import LucidBotsLogo from './assets/LucidBots_Colored_Logo_Full.png';
 import EducationImage from './assets/education.jpg';
 import InnovationImage from './assets/innovation2.jpg';
-import ImpactImage from './assets/impact.jpg';
+import ImpactImage from './assets/andrewteach.png';
 import AndrewImage from './assets/andrewq.jpg';
 import PDQuoteImage from './assets/pdquote.jpg';
 
@@ -20,13 +20,10 @@ function App() {
               className="h-12 w-auto"
             />
           </div>
-          <button className="bg-[#23C0D8] text-white px-8 py-3 rounded-md hover:bg-[#4FCDE0] transition-colors text-lg font-semibold">
-            Donate Today
-          </button>
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* New Hero Section */}
       <div className="pt-32 pb-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center mb-20">
           <div className="flex justify-center mb-12">
@@ -39,51 +36,17 @@ function App() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
             Extending Human Reach
           </h1>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold italic bg-gradient-to-r from-[#23C0D8] to-[#4FCDE0] text-transparent bg-clip-text">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold italic bg-gradient-to-r from-[#23C0D8] to-[#4FCDE0] text-transparent bg-clip-text mb-12">
             Beyond Robotics
           </h2>
-        </div>
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="aspect-w-16 aspect-h-9">
-              <img 
-                src={InnovationImage}
-                alt="Innovation at LucidBots"
-                className="w-full h-80 object-cover"
-              />
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">Innovation</h3>
-              <p className="text-gray-600">Pushing the boundaries of what's possible in robotics</p>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="aspect-w-16 aspect-h-9">
-              <img 
-                src={EducationImage}
-                alt="Education at LucidBots"
-                className="w-full h-80 object-cover"
-              />
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">Education</h3>
-              <p className="text-gray-600">Empowering the next generation of robotics engineers</p>
-            </div>
-          </div>
-          
-          <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
-            <div className="aspect-w-16 aspect-h-9">
-              <img 
-                src={ImpactImage}
-                alt="Impact at LucidBots"
-                className="w-full h-80 object-cover object-[center_75%]"
-              />
-            </div>
-            <div className="p-8">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">Impact</h3>
-              <p className="text-gray-600">Creating positive change in communities worldwide</p>
-            </div>
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#142933] mb-8">
+              Ready to change the world and join the first Robotic Services non-profit?
+            </h3>
+            <button className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center">
+              Sign Up Today
+              <ArrowRight className="ml-2 h-6 w-6" />
+            </button>
           </div>
         </div>
       </div>
@@ -97,11 +60,11 @@ function App() {
           </div>
           
           <div className="max-w-5xl mx-auto">
-            <div className="rounded-xl overflow-hidden shadow-2xl">
+            <div className="rounded-xl overflow-hidden shadow-2xl bg-[#142933]">
               <img 
                 src={AndrewImage}
                 alt="LucidBots Leadership"
-                className="w-full h-[600px] object-cover object-center"
+                className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-contain"
               />
             </div>
             <div className="text-center mt-8">
@@ -148,119 +111,59 @@ function App() {
         </div>
       </div>
 
-      {/* Values Section */}
-      <div className="bg-gray-50 py-24">
+      {/* Services Section */}
+      <div className="bg-[#142933] py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Living Our Values</h2>
-            <div className="w-24 h-1 bg-[#23C0D8] mx-auto"></div>
-          </div>
-          
-          <div className="max-w-5xl mx-auto">
-            {/* First row - 3 cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-                <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <Heart className="h-8 w-8 text-[#23C0D8]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Lead with Compassion</h3>
-                <p className="text-gray-600">
-                  We prioritize genuine care and respect in every interaction, fostering an inclusive culture that drives meaningful impact.
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-                <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <GraduationCap className="h-8 w-8 text-[#23C0D8]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Grow with Purpose</h3>
-                <p className="text-gray-600">
-                  We embrace intentional growth through ambitious goals and continuous learning, ensuring our evolution outpaces change.
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-                <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <Users className="h-8 w-8 text-[#23C0D8]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Win as One Team</h3>
-                <p className="text-gray-600">
-                  Success comes through collaboration. We build trust, share ownership, and amplify our impact together.
-                </p>
-              </div>
-            </div>
-
-            {/* Second row - 2 centered cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-                <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <ArrowRight className="h-8 w-8 text-[#23C0D8]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Drive Positive Change</h3>
-                <p className="text-gray-600">
-                  We take ownership of our future, embracing challenges as opportunities for innovation and progress.
-                </p>
-              </div>
-
-              <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-                <div className="h-16 w-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                  <Lightbulb className="h-8 w-8 text-[#23C0D8]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Pursue Extraordinary Impact</h3>
-                <p className="text-gray-600">
-                  We solve problems in revolutionary ways, working hard at work worth doing to create unprecedented change.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Impact Stats */}
-      <div className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <Lightbulb className="h-12 w-12 text-[#23C0D8] mx-auto mb-4" />
-              <h3 className="text-4xl font-bold text-gray-900 mb-2">100K+</h3>
-              <p className="text-gray-600">Revenue Challenge Met</p>
-            </div>
-            <div>
-              <Users className="h-12 w-12 text-[#23C0D8] mx-auto mb-4" />
-              <h3 className="text-4xl font-bold text-gray-900 mb-2">50+</h3>
-              <p className="text-gray-600">Training Programs</p>
-            </div>
-            <div>
-              <Building2 className="h-12 w-12 text-[#23C0D8] mx-auto mb-4" />
-              <h3 className="text-4xl font-bold text-gray-900 mb-2">25+</h3>
-              <p className="text-gray-600">Partner Organizations</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Services Section */}
-      <div className="bg-[#142933] py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-white">Our Services</h2>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h2>
             <p className="mt-4 text-xl text-[#D3F2F7]">Real-world robotics meets social impact</p>
+            <div className="w-32 h-1 bg-[#23C0D8] mx-auto mt-6"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Service Overview</h3>
-              <p className="text-gray-600 mb-4">In-house services providing controlled environments for product testing while generating revenue for social impact.</p>
-              <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Learn More →</a>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <div className="aspect-w-16 aspect-h-9">
+                <img 
+                  src={InnovationImage}
+                  alt="Robotics Education at LucidBots"
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Accessible Robotics Education</h3>
+                <p className="text-gray-600 mb-4">Making robotics education accessible to everyone through hands-on learning and real-world applications.</p>
+                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Learn More →</a>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Training Programs</h3>
-              <p className="text-gray-600 mb-4">Hands-on experience for veterans and individuals with disabilities, creating pathways to tech careers.</p>
-              <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Join Program →</a>
+            
+            <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <div className="aspect-w-16 aspect-h-9">
+                <img 
+                  src={EducationImage}
+                  alt="Education at LucidBots"
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Training Programs</h3>
+                <p className="text-gray-600 mb-4">Hands-on experience for veterans and individuals with disabilities, creating pathways to tech careers.</p>
+                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Join Program →</a>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg">
-              <h3 className="text-xl font-semibold mb-4">Partnerships</h3>
-              <p className="text-gray-600 mb-4">Collaborating with educational institutions and nonprofits to expand our reach and impact.</p>
-              <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Partner With Us →</a>
+            
+            <div className="bg-white rounded-xl overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
+              <div className="aspect-w-16 aspect-h-9">
+                <img 
+                  src={ImpactImage}
+                  alt="Impact at LucidBots"
+                  className="w-full h-80 object-cover object-[center_75%]"
+                />
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3">Partnerships</h3>
+                <p className="text-gray-600 mb-4">Collaborating with educational institutions and nonprofits to expand our reach and impact.</p>
+                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Partner With Us →</a>
+              </div>
             </div>
           </div>
         </div>
