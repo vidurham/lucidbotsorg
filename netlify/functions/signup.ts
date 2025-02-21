@@ -2,14 +2,9 @@ import { Handler } from '@netlify/functions';
 import fetch from 'node-fetch';
 
 export const handler: Handler = async (event) => {
-  // Fix the type comparison
-  if (event.httpMethod !== 'POST' && event.httpMethod !== 'OPTIONS') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
-  }
-
   // Add CORS headers
   const headers = {
-    'Access-Control-Allow-Origin': 'https://vidurham.github.io',
+    'Access-Control-Allow-Origin': '*', // Or your specific domain
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
   };
@@ -20,6 +15,14 @@ export const handler: Handler = async (event) => {
       statusCode: 200,
       headers,
       body: '',
+    };
+  }
+
+  if (event.httpMethod !== 'POST') {
+    return { 
+      statusCode: 405, 
+      headers,
+      body: 'Method Not Allowed' 
     };
   }
 
@@ -44,6 +47,7 @@ export const handler: Handler = async (event) => {
       body: JSON.stringify({ message: 'Success' }),
     };
   } catch (error) {
+    console.error('Error:', error);
     return {
       statusCode: 500,
       headers,
