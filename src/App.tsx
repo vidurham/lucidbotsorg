@@ -15,8 +15,45 @@ function App() {
   const [isPartnerFormOpen, setIsPartnerFormOpen] = useState(false);
   const [isStoryMessageOpen, setIsStoryMessageOpen] = useState(false);
 
+  // Add state for form and success message
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const openSignUpForm = () => setIsSignUpFormOpen(true);
   const openPartnerForm = () => setIsPartnerFormOpen(true);
+
+  const handleSignUp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/.netlify/functions/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit');
+      }
+
+      setShowSuccess(true);
+      setFormData({ fullName: '', email: '' }); // Reset form
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Error:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -33,7 +70,7 @@ function App() {
         </div>
       </nav>
 
-      {/* New Hero Section */}
+      {/* Hero Section */}
       <div className="pt-32 pb-20 px-4 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left side content */}
@@ -54,30 +91,38 @@ function App() {
             </h3>
             
             {/* Inline signup form */}
-            <div className="space-y-4 max-w-md">
+            <form onSubmit={handleSignUp} className="space-y-4 max-w-md">
               <input
                 type="text"
                 placeholder="Enter your name"
+                value={formData.fullName}
+                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                required
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
               />
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                required
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
               />
               <button 
-                className="w-full bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center justify-center"
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center justify-center disabled:opacity-50"
               >
-                Sign Up To Learn More Today
+                {isSubmitting ? 'Signing up...' : 'Sign Up To Learn More Today'}
                 <ArrowRight className="ml-2 h-6 w-6" />
               </button>
-            </div>
+            </form>
           </div>
 
           {/* Right side image */}
           <div className="hidden md:block relative h-[600px]">
             <img 
-              src={InnovationImage} // Or whatever image you want to use
+              src={InnovationImage}
               alt="Robotics Innovation"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl"
             />
@@ -85,6 +130,16 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Success Message Popup */}
+      {showSuccess && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-8 max-w-md w-full mx-4 relative text-center">
+            <h2 className="text-2xl font-bold text-[#142933] mb-4">Thank You!</h2>
+            <p className="text-gray-600">We'll be in touch soon.</p>
+          </div>
+        </div>
+      )}
 
       {/* Services Section */}
       <div className="bg-[#142933] py-24">

@@ -10,13 +10,11 @@ interface SignUpFormProps {
 export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
   const [formData, setFormData] = useState({
     fullName: '',
-    companyName: '',
     email: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
-  const [retryCount, setRetryCount] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,9 +22,6 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
     setError(null);
 
     try {
-      // Log the data being sent
-      console.log('Sending form data:', formData);
-      
       const response = await fetch('/.netlify/functions/signup', {
         method: 'POST',
         headers: {
@@ -45,7 +40,7 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
       setTimeout(() => {
         onClose();
         setShowSuccess(false);
-        setFormData({ fullName: '', companyName: '', email: '' });
+        setFormData({ fullName: '', email: '' });
       }, 2000);
     } catch (err) {
       setError('Failed to submit form. Please try again.');
@@ -92,21 +87,6 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
               value={formData.fullName}
               onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-            />
-          </div>
-          
-          <div>
-            <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 mb-1">
-              Company Name
-            </label>
-            <input
-              type="text"
-              id="companyName"
-              required
-              placeholder="Company name..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
-              value={formData.companyName}
-              onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
             />
           </div>
           
