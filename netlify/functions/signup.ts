@@ -21,28 +21,63 @@ export const handler: Handler = async (event) => {
   }
 
   try {
-    const body = JSON.parse(event.body || '{}');
+    const formData = JSON.parse(event.body || '{}');
+    
+    const slackMessage = {
+      text: "New Sign Up!",
+      blocks: [
+        {
+          type: "header",
+          text: {
+            type: "plain_text",
+            text: "🎉 New Sign Up!",
+            emoji: true
+          }
+        },
+        {
+          type: "section",
+          fields: [
+            {
+              type: "mrkdwn",
+              text: `*Name:*\n${formData.fullName}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*Company:*\n${formData.companyName}`
+            },
+            {
+              type: "mrkdwn",
+              text: `*Email:*\n${formData.email}`
+            }
+          ]
+        }
+      ]
+    };
+
     const response = await fetch(process.env.SIGNUP_WEBHOOK_URL!, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      body: JSON.stringify(slackMessage)
     });
 
     if (!response.ok) {
-      throw new Error(`Slack API error: ${response.statusText}`);
+      throw new Error('Failed to send to Slack');
     }
 
     return {
       statusCode: 200,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ message: 'Success' }),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ success: true })
     };
   } catch (error) {
-    console.error('Error:', error);
     return {
       statusCode: 500,
-      headers: { 'Access-Control-Allow-Origin': '*' },
-      body: JSON.stringify({ error: 'Failed to send to Slack' }),
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({ error: 'Failed to process request' })
     };
   }
 }; 

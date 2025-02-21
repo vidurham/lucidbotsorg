@@ -52,82 +52,26 @@ async function sendToSlackWithRetry(
   }
 }
 
-export async function sendSignupToSlack(formData: { fullName: string; companyName: string; email: string }) {
-  const message: SlackMessage = {
-    text: `New Sign Up from ${formData.fullName}`,
-    blocks: [
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: "🎉 New Sign Up!",
-          emoji: true
-        }
-      },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*Name:*\n${formData.fullName}`
-          },
-          {
-            type: "mrkdwn",
-            text: `*Company:*\n${formData.companyName}`
-          }
-        ]
-      },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*Email:*\n${formData.email}`
-          }
-        ]
-      }
-    ]
-  };
+async function sendToSlack(endpoint: string, message: any) {
+  const response = await fetch(`${API_BASE}/${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message),
+  });
 
-  return sendToSlackWithRetry(SIGNUP_ENDPOINT, message);
+  if (!response.ok) {
+    throw new Error('Failed to send message');
+  }
+
+  return response.json();
+}
+
+export async function sendSignupToSlack(formData: { fullName: string; companyName: string; email: string }) {
+  return sendToSlack('signup', formData);
 }
 
 export async function sendPartnershipToSlack(formData: { fullName: string; organizationName: string; email: string }) {
-  const message: SlackMessage = {
-    text: `New Partnership Interest from ${formData.fullName}`,
-    blocks: [
-      {
-        type: "header",
-        text: {
-          type: "plain_text",
-          text: "🤝 New Partnership Interest!",
-          emoji: true
-        }
-      },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*Name:*\n${formData.fullName}`
-          },
-          {
-            type: "mrkdwn",
-            text: `*Organization:*\n${formData.organizationName}`
-          }
-        ]
-      },
-      {
-        type: "section",
-        fields: [
-          {
-            type: "mrkdwn",
-            text: `*Email:*\n${formData.email}`
-          }
-        ]
-      }
-    ]
-  };
-
-  return sendToSlackWithRetry(PARTNER_ENDPOINT, message);
+  return sendToSlack('partner', formData);
 } 
