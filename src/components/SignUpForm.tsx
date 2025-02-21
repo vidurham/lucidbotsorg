@@ -16,6 +16,7 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [retryCount, setRetryCount] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,10 +29,17 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
       setTimeout(() => {
         onClose();
         setShowSuccess(false);
-        setFormData({ fullName: '', companyName: '', email: '' }); // Reset form
+        setFormData({ fullName: '', companyName: '', email: '' });
+        setRetryCount(0);
       }, 2000);
     } catch (err) {
-      setError('Failed to submit form. Please try again.');
+      setRetryCount(prev => prev + 1);
+      if (retryCount >= 3) {
+        setError('Unable to submit form. Please try again later.');
+      } else {
+        setError('Retrying submission...');
+        setTimeout(() => handleSubmit(e), 1000);
+      }
     } finally {
       setIsSubmitting(false);
     }

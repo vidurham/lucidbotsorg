@@ -1,9 +1,7 @@
 // Base URL for API endpoints
-const API_BASE = import.meta.env.PROD 
-  ? '/.netlify/functions'  // In production, use relative path
-  : 'http://localhost:8888/.netlify/functions'; // For local development
+const API_BASE = '/.netlify/functions';  // Always use relative path
 
-// Use serverless functions instead of direct webhook URLs
+// Endpoints
 const SIGNUP_ENDPOINT = `${API_BASE}/signup`;
 const PARTNER_ENDPOINT = `${API_BASE}/partner`;
 
@@ -12,9 +10,19 @@ interface SlackMessage {
   blocks?: any[];
 }
 
-async function sendToSlack(webhookUrl: string, message: SlackMessage) {
+// Retry configuration
+const MAX_RETRIES = 3;
+const RETRY_DELAY = 1000; // 1 second
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+async function sendToSlackWithRetry(
+  url: string, 
+  message: SlackMessage, 
+  retryCount = 0
+): Promise<boolean> {
   try {
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,19 +31,30 @@ async function sendToSlack(webhookUrl: string, message: SlackMessage) {
     });
 
     if (!response.ok) {
-      throw new Error(`Slack API error: ${response.statusText}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return true;
+    const data = await response.json();
+    if (data.message === 'Success') {
+      return true;
+    }
+    throw new Error('Invalid response format');
+
   } catch (error) {
-    console.error('Error sending to Slack:', error);
-    throw error;
+    console.error(`Attempt ${retryCount + 1} failed:`, error);
+    
+    if (retryCount < MAX_RETRIES) {
+      await sleep(RETRY_DELAY);
+      return sendToSlackWithRetry(url, message, retryCount + 1);
+    }
+    
+    throw new Error(`Failed after ${MAX_RETRIES} attempts`);
   }
 }
 
 export async function sendSignupToSlack(formData: { fullName: string; companyName: string; email: string }) {
   const message: SlackMessage = {
-    text: "New Sign Up", // Added required fallback text
+    text: `New Sign Up from ${formData.fullName}`,
     blocks: [
       {
         type: "header",
@@ -70,12 +89,12 @@ export async function sendSignupToSlack(formData: { fullName: string; companyNam
     ]
   };
 
-  return sendToSlack(SIGNUP_ENDPOINT, message);
+  return sendToSlackWithRetry(SIGNUP_ENDPOINT, message);
 }
 
 export async function sendPartnershipToSlack(formData: { fullName: string; organizationName: string; email: string }) {
   const message: SlackMessage = {
-    text: "New Partnership Interest", // Required fallback text
+    text: `New Partnership Interest from ${formData.fullName}`,
     blocks: [
       {
         type: "header",
@@ -110,5 +129,5 @@ export async function sendPartnershipToSlack(formData: { fullName: string; organ
     ]
   };
 
-  return sendToSlack(PARTNER_ENDPOINT, message);
+  return sendToSlackWithRetry(PARTNER_ENDPOINT, message);
 } 
