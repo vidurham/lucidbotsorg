@@ -23,6 +23,10 @@ export const handler: Handler = async (event) => {
   try {
     const formData = JSON.parse(event.body || '{}');
     
+    // Log for debugging
+    console.log('Received form data:', formData);
+    console.log('Using webhook URL:', process.env.SIGNUP_WEBHOOK_URL);
+
     const slackMessage = {
       text: "New Sign Up!",
       blocks: [
@@ -54,30 +58,40 @@ export const handler: Handler = async (event) => {
       ]
     };
 
-    const response = await fetch(process.env.SIGNUP_WEBHOOK_URL!, {
+    if (!process.env.SIGNUP_WEBHOOK_URL) {
+      throw new Error('Webhook URL not configured');
+    }
+
+    const response = await fetch(process.env.SIGNUP_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(slackMessage)
     });
 
     if (!response.ok) {
-      throw new Error('Failed to send to Slack');
+      throw new Error(`Slack API error: ${response.statusText}`);
     }
 
     return {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({ success: true })
     };
   } catch (error) {
+    console.error('Function error:', error);
     return {
       statusCode: 500,
       headers: {
-        'Access-Control-Allow-Origin': '*'
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ error: 'Failed to process request' })
+      body: JSON.stringify({ 
+        error: 'Failed to process request',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      })
     };
   }
 }; 
