@@ -217,7 +217,7 @@ function App() {
                 className="w-full h-[300px] md:h-[400px] lg:h-[600px] object-contain"
               />
             </div>
-            <div className="text-center mt-8">
+            {/* <div className="text-center mt-8">
               <button 
                 onClick={() => setIsStoryMessageOpen(true)}
                 className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center mb-8"
@@ -225,7 +225,7 @@ function App() {
                 Read Full Story
                 <ArrowRight className="ml-2 h-6 w-6" />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
