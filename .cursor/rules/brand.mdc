@@ -1,0 +1,67 @@
+---
+description: branding guide
+globs: 
+---
+{
+  "name": "Landing Page – Lucid Bots Brand",
+  "description": "Applies Lucid Bots branding to the website landing page. Enforces brand voice, visual design, typography, color palette, logo usage, and UI components per the brand guidelines.",
+  "filePattern": "src/landing-page/**/*.{html,css,js}",
+  "rules": {
+    "brandVoice": {
+      "tone": [
+        "authentic",
+        "approachable",
+        "confident",
+        "enthusiastic"
+      ],
+      "writingStyle": "Clear, direct, and solution-oriented with minimal jargon, highlighting customer success and practical benefits."
+    },
+    "typography": {
+      "heading": "Oswald",
+      "subheading": "Roboto",
+      "body": "Arial"
+    },
+    "colorPalette": {
+      "digitalPrimary": "#23C0D8",
+      "digitalSecondary": "#4FCDE0",
+      "accent": "#FFDF33",
+      "neutralDark": "#142933",
+      "neutralLight": "#D3F2F7"
+    },
+    "logo": {
+      "usage": "Include the provided Lucid Bots logo with a safety area equal to 1/5 of the logo height. The logo must remain unaltered (no rotation, skew, drop shadows, gradients, or outlines).",
+      "placement": "Display prominently in header and footer sections to reinforce brand identity."
+    },
+    "buttons": {
+      "primary": {
+        "usage": "For key calls-to-action (e.g., 'Get a Quote', 'Learn More').",
+        "style": {
+          "backgroundColor": "#23C0D8",
+          "textColor": "#FFFFFF",
+          "padding": "responsive spacing",
+          "border": "none"
+        }
+      },
+      "secondary": {
+        "usage": "For alternate actions or secondary navigation.",
+        "style": {
+          "backgroundColor": "#FFFFFF",
+          "textColor": "#142933",
+          "border": "1px solid #142933"
+        }
+      }
+    },
+    "visualElements": {
+      "images": "Utilize approved, high-quality marketing images without alterations. Use only images for which rights have been secured.",
+      "icons": "Select icons from the approved set (e.g., Soft Wash, Efficiency, AI) that align with the messaging framework."
+    },
+    "layout": {
+      "spacing": "Ensure ample white space, clear section divisions, and adherence to logo safety area guidelines.",
+      "responsive": "Design must be mobile-first, ensuring legibility and usability across all devices."
+    },
+    "contentGuidelines": {
+      "messageFramework": "All copy should emphasize innovation in AI and robotics, safety, operational efficiency, and customer-centric solutions with clear, factual benefits.",
+      "idealAudience": "Target professional contractors, property managers, and decision-makers seeking practical and reliable robotic cleaning solutions."
+    }
+  },
+}
