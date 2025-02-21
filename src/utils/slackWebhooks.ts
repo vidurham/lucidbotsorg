@@ -1,11 +1,11 @@
-// Replace these webhook URLs with your serverless function URLs
-const SIGNUP_WEBHOOK_URL = 'https://hooks.slack.com/services/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';  // You'll need to create this endpoint
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
+// Base URL for API endpoints
+const API_BASE = import.meta.env.PROD 
+  ? '/.netlify/functions'  // In production, use relative path
+  : 'http://localhost:8888/.netlify/functions'; // For local development
 
-// Use direct webhook in development, API route in production
-const PARTNER_ENDPOINT = import.meta.env.DEV 
-  ? SLACK_WEBHOOK_URL 
-  : '/api/partner';
+// Use serverless functions instead of direct webhook URLs
+const SIGNUP_ENDPOINT = `${API_BASE}/signup`;
+const PARTNER_ENDPOINT = `${API_BASE}/partner`;
 
 interface SlackMessage {
   text: string;
@@ -20,16 +20,7 @@ async function sendToSlack(webhookUrl: string, message: SlackMessage) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(message),
-      // Add CORS headers for direct Slack webhook calls
-      ...(import.meta.env.DEV && {
-        mode: 'no-cors'
-      })
     });
-
-    // When using no-cors, we can't read the response
-    if (import.meta.env.DEV) {
-      return true;
-    }
 
     if (!response.ok) {
       throw new Error(`Slack API error: ${response.statusText}`);
@@ -79,7 +70,7 @@ export async function sendSignupToSlack(formData: { fullName: string; companyNam
     ]
   };
 
-  return sendToSlack(SIGNUP_WEBHOOK_URL, message);
+  return sendToSlack(SIGNUP_ENDPOINT, message);
 }
 
 export async function sendPartnershipToSlack(formData: { fullName: string; organizationName: string; email: string }) {
