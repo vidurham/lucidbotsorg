@@ -21,7 +21,7 @@ export function StoryMessage({ isOpen, onClose }: StoryMessageProps) {
         
         <div className="text-center">
           <p className="text-xl text-[#142933] mb-6 italic">
-            "Write a short story for the people boss, I told my family this one the first day you told me so make it important! I can change the quote on the picture easily so just let me know ;)"
+            "Write a short story for the people, I told my family this one the first day you told me so make it important! I can change the quote on the picture easily so just let me know ;)"
           </p>
           <button
             onClick={onClose}
