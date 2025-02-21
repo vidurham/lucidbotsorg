@@ -123,7 +123,7 @@ function App() {
           {/* Right side image */}
           <div className="hidden md:block relative h-[600px]">
             <img 
-              src={InnovationImage}
+              src={HeroImage}
               alt="Robotics Innovation"
               className="absolute inset-0 w-full h-full object-cover rounded-2xl"
             />
