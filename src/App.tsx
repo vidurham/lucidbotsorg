@@ -18,7 +18,6 @@ function App() {
 
   // Add state for form and success message
   const [formData, setFormData] = useState({
-    fullName: '',
     email: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +44,7 @@ function App() {
       }
 
       setShowSuccess(true);
-      setFormData({ fullName: '', email: '' }); // Reset form
+      setFormData({ email: '' }); // Reset form
       setTimeout(() => {
         setShowSuccess(false);
       }, 2000);
@@ -76,11 +75,6 @@ function App() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left side content */}
           <div className="text-left">
-            <img 
-              src={LucidBotsLogo} 
-              alt="LucidBots Logo" 
-              className="h-24 w-auto mb-8"
-            />
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
               Extending Human Reach
             </h1>
@@ -94,14 +88,6 @@ function App() {
             {/* Inline signup form */}
             <form onSubmit={handleSignUp} className="space-y-4 max-w-md">
               <input
-                type="text"
-                placeholder="Enter your name"
-                value={formData.fullName}
-                onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
-              />
-              <input
                 type="email"
                 placeholder="Enter your email"
                 value={formData.email}
@@ -114,7 +100,7 @@ function App() {
                 disabled={isSubmitting}
                 className="w-full bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center justify-center disabled:opacity-50"
               >
-                {isSubmitting ? 'Signing up...' : 'Sign Up To Learn More Today'}
+                {isSubmitting ? 'Signing up...' : 'Sign Up To Learn More'}
                 <ArrowRight className="ml-2 h-6 w-6" />
               </button>
             </form>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
-import { sendSignupToSlack } from '../utils/slackWebhooks';
 
 interface SignUpFormProps {
   isOpen: boolean;
@@ -8,10 +7,7 @@ interface SignUpFormProps {
 }
 
 export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-  });
+  const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -27,7 +23,7 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ email })
       });
 
       const data = await response.json();
@@ -40,10 +36,10 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
       setTimeout(() => {
         onClose();
         setShowSuccess(false);
-        setFormData({ fullName: '', email: '' });
+        setEmail('');
       }, 2000);
     } catch (err) {
-      setError('Failed to submit form. Please try again.');
+      setError('Failed to submit. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -72,24 +68,9 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
           <X className="h-6 w-6" />
         </button>
         
-        <h2 className="text-2xl font-bold text-[#142933] mb-6">Join LucidBots.org</h2>
+        <h2 className="text-2xl font-bold text-[#142933] mb-6">Sign-up to learn more about LucidBots.org</h2>
         
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="fullName"
-              required
-              placeholder="Your name..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
-              value={formData.fullName}
-              onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-            />
-          </div>
-          
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
               Email
@@ -98,10 +79,10 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
               type="email"
               id="email"
               required
-              placeholder="Email..."
+              placeholder="Enter your email..."
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-[#23C0D8] focus:border-[#23C0D8]"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           
@@ -114,7 +95,7 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
             disabled={isSubmitting}
             className="w-full bg-[#23C0D8] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#4FCDE0] transition-colors disabled:opacity-50"
           >
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+            {isSubmitting ? 'Submitting...' : 'Sign Up To Learn More'}
           </button>
         </form>
       </div>

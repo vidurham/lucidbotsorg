@@ -24,17 +24,16 @@ export const handler: Handler = async (event) => {
 
     const formData = JSON.parse(event.body || '{}');
     
-    // Validate form data
-    if (!formData.fullName || !formData.email) {
+    if (!formData.email) {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ error: 'Missing required fields' })
+        body: JSON.stringify({ error: 'Email is required' })
       };
     }
 
     const message = {
-      text: `New Sign Up from ${formData.fullName}`,
+      text: `New Sign Up!`,
       blocks: [
         {
           type: "header",
@@ -48,7 +47,7 @@ export const handler: Handler = async (event) => {
           type: "section",
           text: {
             type: "mrkdwn",
-            text: `*Name:* ${formData.fullName}\n*Email:* ${formData.email}`
+            text: `*Email:* ${formData.email}`
           }
         }
       ]
