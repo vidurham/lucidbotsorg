@@ -9,6 +9,7 @@ import PDQuoteImage from './assets/pdquote.jpg';
 import { SignUpForm } from './components/SignUpForm';
 import { PartnerForm } from './components/PartnerForm';
 import { StoryMessage } from './components/StoryMessage';
+import HeroImage from './assets/innovation.jpg';
 
 function App() {
   const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
@@ -181,7 +182,7 @@ function App() {
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Training Programs</h3>
-                <p className="text-gray-600 mb-4">Hands-on experience for veterans and individuals with disabilities, creating pathways to tech careers.</p>
+                <p className="text-gray-600 mb-4">Hands-on experience for Veterans and individuals with disabilities, creating pathways to tech careers.</p>
                 <button 
                   onClick={openPartnerForm}
                   className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]"
