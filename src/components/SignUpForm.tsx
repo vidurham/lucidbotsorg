@@ -24,22 +24,31 @@ export function SignUpForm({ isOpen, onClose }: SignUpFormProps) {
     setError(null);
 
     try {
-      await sendSignupToSlack(formData);
+      // Log the data being sent
+      console.log('Sending form data:', formData);
+      
+      const response = await fetch('/.netlify/functions/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit');
+      }
+
       setShowSuccess(true);
       setTimeout(() => {
         onClose();
         setShowSuccess(false);
         setFormData({ fullName: '', companyName: '', email: '' });
-        setRetryCount(0);
       }, 2000);
     } catch (err) {
-      setRetryCount(prev => prev + 1);
-      if (retryCount >= 3) {
-        setError('Unable to submit form. Please try again later.');
-      } else {
-        setError('Retrying submission...');
-        setTimeout(() => handleSubmit(e), 1000);
-      }
+      setError('Failed to submit form. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
