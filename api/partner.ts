@@ -1,18 +1,22 @@
+import { Handler } from '@netlify/functions';
+import fetch from 'node-fetch';
+
 export const config = {
   runtime: 'edge',
 };
 
-const SLACK_WEBHOOK_URL = 'https://hooks.slack.com/services/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';
-
-export default async function handler(request: Request) {
-  if (request.method !== 'POST') {
-    return new Response('Method Not Allowed', { status: 405 });
+export const handler: Handler = async (event) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: 'Method Not Allowed',
+    };
   }
 
   try {
-    const body = await request.json();
+    const body = await event.json();
     
-    const response = await fetch(SLACK_WEBHOOK_URL, {
+    const response = await fetch(body.webhookUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -24,18 +28,20 @@ export default async function handler(request: Request) {
       throw new Error('Slack API error');
     }
 
-    return new Response(JSON.stringify({ message: 'Success' }), {
-      status: 200,
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'Success' }),
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    };
   } catch (error) {
-    return new Response(JSON.stringify({ error: 'Failed to send to Slack' }), {
-      status: 500,
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed to send to Slack' }),
       headers: {
         'Content-Type': 'application/json',
       },
-    });
+    };
   }
-} 
+}; 
