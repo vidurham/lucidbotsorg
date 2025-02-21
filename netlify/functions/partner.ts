@@ -9,27 +9,44 @@ export const handler: Handler = async (event: HandlerEvent) => {
     'Content-Type': 'application/json'
   };
 
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers,
-      body: ''
-    };
-  }
-
-  if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: 'Method not allowed' })
-    };
-  }
-
   try {
-    const formData = JSON.parse(event.body || '{}');
+    // Log incoming request
+    console.log('Event body:', event.body);
+    console.log('Webhook URL:', process.env.PARTNER_WEBHOOK_URL);
+
+    if (event.httpMethod === 'OPTIONS') {
+      return { statusCode: 200, headers, body: '' };
+    }
+
+    if (event.httpMethod !== 'POST') {
+      return {
+        statusCode: 405,
+        headers,
+        body: JSON.stringify({ error: 'Method not allowed' })
+      };
+    }
+
+    if (!event.body) {
+      throw new Error('No body provided');
+    }
+
+    const formData = JSON.parse(event.body);
+    
+    // Validate form data
+    if (!formData.fullName || !formData.organizationName || !formData.email) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: 'Missing required fields' })
+      };
+    }
+
+    if (!process.env.PARTNER_WEBHOOK_URL) {
+      throw new Error('Webhook URL not configured');
+    }
 
     const message = {
-      text: `New Partnership Interest from ${formData.fullName}`, // Required for Slack
+      text: `New Partnership Interest from ${formData.fullName}`,
       blocks: [
         {
           type: "header",
@@ -49,20 +66,19 @@ export const handler: Handler = async (event: HandlerEvent) => {
       ]
     };
 
-    if (!process.env.PARTNER_WEBHOOK_URL) {
-      throw new Error('Webhook URL not configured');
-    }
-
     const response = await fetch(process.env.PARTNER_WEBHOOK_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(message)
     });
 
+    const responseText = await response.text();
+    console.log('Slack webhook URL:', process.env.PARTNER_WEBHOOK_URL);
+    console.log('Slack response:', responseText);
+    console.log('Response status:', response.status);
+
     if (!response.ok) {
-      throw new Error(`Slack error: ${await response.text()}`);
+      throw new Error(`Slack error: ${responseText} (Status: ${response.status})`);
     }
 
     return {
@@ -70,8 +86,9 @@ export const handler: Handler = async (event: HandlerEvent) => {
       headers,
       body: JSON.stringify({ success: true })
     };
+
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Function error:', error);
     return {
       statusCode: 500,
       headers,
