@@ -2,7 +2,7 @@ import React from 'react';
 import { Bot, Brain, Users, ArrowRight, Lightbulb, Building2, GraduationCap, Heart } from 'lucide-react';
 import LucidBotsLogo from './assets/LucidBots_Colored_Logo_Full.png';
 import EducationImage from './assets/education.jpg';
-import InnovationImage from './assets/innovation.jpg';
+import InnovationImage from './assets/innovation2.jpg';
 import ImpactImage from './assets/impact.jpg';
 import AndrewImage from './assets/andrewq.jpg';
 import PDQuoteImage from './assets/pdquote.jpg';
@@ -49,7 +49,7 @@ function App() {
               <img 
                 src={InnovationImage}
                 alt="Innovation at LucidBots"
-                className="w-full h-80 object-cover object-[center_90%]"
+                className="w-full h-80 object-cover"
               />
             </div>
             <div className="p-8">
