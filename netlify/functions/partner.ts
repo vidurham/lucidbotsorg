@@ -1,35 +1,35 @@
-import { Handler } from '@netlify/functions';
+import { Handler, HandlerEvent } from '@netlify/functions';
 import fetch from 'node-fetch';
 
-export const handler: Handler = async (event) => {
-  // Handle CORS
+export const handler: Handler = async (event: HandlerEvent) => {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Content-Type': 'application/json'
+  };
+
   if (event.httpMethod === 'OPTIONS') {
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': 'Content-Type',
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      },
-      body: '',
+      headers,
+      body: ''
     };
   }
 
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: JSON.stringify({ error: 'Method not allowed' }),
+      headers,
+      body: JSON.stringify({ error: 'Method not allowed' })
     };
   }
 
   try {
     const formData = JSON.parse(event.body || '{}');
-    
-    // Log for debugging
-    console.log('Received form data:', formData);
-    console.log('Using webhook URL:', process.env.PARTNER_WEBHOOK_URL);
 
     const message = {
+      text: `New Partnership Interest from ${formData.fullName}`, // Required for Slack
       blocks: [
         {
           type: "header",
@@ -49,7 +49,11 @@ export const handler: Handler = async (event) => {
       ]
     };
 
-    const response = await fetch(process.env.PARTNER_WEBHOOK_URL!, {
+    if (!process.env.PARTNER_WEBHOOK_URL) {
+      throw new Error('Webhook URL not configured');
+    }
+
+    const response = await fetch(process.env.PARTNER_WEBHOOK_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -58,27 +62,23 @@ export const handler: Handler = async (event) => {
     });
 
     if (!response.ok) {
-      throw new Error(`Slack error: ${response.statusText}`);
+      throw new Error(`Slack error: ${await response.text()}`);
     }
 
     return {
       statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({ success: true }),
+      headers,
+      body: JSON.stringify({ success: true })
     };
   } catch (error) {
     console.error('Error:', error);
     return {
       statusCode: 500,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers,
       body: JSON.stringify({ 
         error: 'Failed to send message',
         details: error instanceof Error ? error.message : 'Unknown error'
-      }),
+      })
     };
   }
 }; 
