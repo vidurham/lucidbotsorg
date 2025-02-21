@@ -4,7 +4,7 @@ import LucidBotsLogo from './assets/LucidBots_Colored_Logo_Full.png';
 import EducationImage from './assets/education.jpg';
 import InnovationImage from './assets/innovation.jpg';
 import ImpactImage from './assets/impact.jpg';
-import AndrewImage from './assets/andrew.png';
+import AndrewImage from './assets/andrewq.jpg';
 import PDQuoteImage from './assets/pdquote.jpg';
 
 function App() {
@@ -88,33 +88,27 @@ function App() {
         </div>
       </div>
 
-      {/* Join the Future Section */}
+      {/* The Vision Section */}
       <div className="bg-[#D3F2F7] py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-[#142933] mb-6">Join the Future</h2>
+            <h2 className="text-5xl md:text-6xl font-bold text-[#142933] mb-6">The Vision</h2>
             <div className="w-32 h-1 bg-[#23C0D8] mx-auto"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-              <Brain className="h-16 w-16 text-[#23C0D8] mb-6 mx-auto" />
-              <h3 className="text-2xl font-semibold mb-4">Faster Innovation</h3>
-              <p className="text-gray-600">Rapid product iteration through real-world testing and feedback.</p>
+          
+          <div className="max-w-5xl mx-auto">
+            <div className="rounded-xl overflow-hidden shadow-2xl">
+              <img 
+                src={AndrewImage}
+                alt="LucidBots Leadership"
+                className="w-full h-[600px] object-cover object-center"
+              />
             </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-              <Building2 className="h-16 w-16 text-[#23C0D8] mb-6 mx-auto" />
-              <h3 className="text-2xl font-semibold mb-4">Mission-Driven</h3>
-              <p className="text-gray-600">Revenue reinvested in community programs and education.</p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-              <GraduationCap className="h-16 w-16 text-[#23C0D8] mb-6 mx-auto" />
-              <h3 className="text-2xl font-semibold mb-4">Hands-On Training</h3>
-              <p className="text-gray-600">Practical experience for veterans and individuals with disabilities.</p>
-            </div>
-            <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow text-center">
-              <Heart className="h-16 w-16 text-[#23C0D8] mb-6 mx-auto" />
-              <h3 className="text-2xl font-semibold mb-4">Community Impact</h3>
-              <p className="text-gray-600">Supporting schools, churches, and underserved groups.</p>
+            <div className="text-center mt-8">
+              <button className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center">
+                Read Full Story
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>
@@ -125,18 +119,25 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Building the Future</h2>
-            <div className="w-32 h-1 bg-blue-600 mx-auto"></div>
+            <div className="w-32 h-1 bg-[#23C0D8] mx-auto"></div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="rounded-xl overflow-hidden shadow-xl">
-              <img 
-                src={AndrewImage}
-                alt="LucidBots Leadership"
-                className="w-full object-cover"
-              />
+            <div className="space-y-8">
+              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Innovative Solutions</h3>
+                <p className="text-gray-700">Creating cutting-edge robotics technology that solves real-world challenges.</p>
+              </div>
+              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Social Impact</h3>
+                <p className="text-gray-700">Empowering communities through education and workforce development.</p>
+              </div>
+              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Sustainable Growth</h3>
+                <p className="text-gray-700">Building a foundation for long-term success and community benefit.</p>
+              </div>
             </div>
-            <div className="rounded-xl overflow-hidden shadow-xl bg-[#142933] p-8 text-white">
+            <div className="rounded-xl overflow-hidden shadow-xl bg-[#142933] p-8">
               <img 
                 src={PDQuoteImage}
                 alt="Peter Drucker Quote"
