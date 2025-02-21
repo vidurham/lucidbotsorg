@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Bot, Brain, Users, ArrowRight, Lightbulb, Building2, GraduationCap, Heart } from 'lucide-react';
 import LucidBotsLogo from './assets/LucidBots_Colored_Logo_Full.png';
 import EducationImage from './assets/education.jpg';
@@ -6,8 +6,18 @@ import InnovationImage from './assets/innovation2.jpg';
 import ImpactImage from './assets/andrewteach.png';
 import AndrewImage from './assets/andrewq.jpg';
 import PDQuoteImage from './assets/pdquote.jpg';
+import { SignUpForm } from './components/SignUpForm';
+import { PartnerForm } from './components/PartnerForm';
+import { StoryMessage } from './components/StoryMessage';
 
 function App() {
+  const [isSignUpFormOpen, setIsSignUpFormOpen] = useState(false);
+  const [isPartnerFormOpen, setIsPartnerFormOpen] = useState(false);
+  const [isStoryMessageOpen, setIsStoryMessageOpen] = useState(false);
+
+  const openSignUpForm = () => setIsSignUpFormOpen(true);
+  const openPartnerForm = () => setIsPartnerFormOpen(true);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation Bar */}
@@ -33,20 +43,26 @@ function App() {
               className="h-40 w-auto"
             />
           </div>
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6">
-            Extending Human Reach
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+            Keep Extending Human Reach
           </h1>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold italic bg-gradient-to-r from-[#23C0D8] to-[#4FCDE0] text-transparent bg-clip-text mb-12">
-            Beyond Robotics
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold italic bg-gradient-to-r from-[#23C0D8] to-[#4FCDE0] text-transparent bg-clip-text mb-12 leading-relaxed py-2">
+            Changing the World, Bot by Bot
           </h2>
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#142933] mb-8">
-              Ready to change the world and join the first Robotic Services non-profit?
+          <div className="max-w-3xl mx-auto mt-16">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#142933] mb-12">
+              Ready to transform "what if..." dreams into "what is" realities through robotics?
             </h3>
-            <button className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center">
+            <button 
+              onClick={openSignUpForm}
+              className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center mb-8"
+            >
               Sign Up Today
               <ArrowRight className="ml-2 h-6 w-6" />
             </button>
+            <p className="text-lg text-gray-600 mt-12 leading-relaxed max-w-2xl mx-auto font-bold">
+              🤔 Wait... you don't want to enhance our built environment and broaden access to inclusive robotics education and meaningful workforce opportunities?
+            </p>
           </div>
         </div>
       </div>
@@ -68,9 +84,12 @@ function App() {
               />
             </div>
             <div className="text-center mt-8">
-              <button className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center">
+              <button 
+                onClick={() => setIsStoryMessageOpen(true)}
+                className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center mb-8"
+              >
                 Read Full Story
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-2 h-6 w-6" />
               </button>
             </div>
           </div>
@@ -132,7 +151,12 @@ function App() {
               <div className="p-8">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Accessible Robotics Education</h3>
                 <p className="text-gray-600 mb-4">Making robotics education accessible to everyone through hands-on learning and real-world applications.</p>
-                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Learn More →</a>
+                <button 
+                  onClick={openPartnerForm}
+                  className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]"
+                >
+                  Learn More →
+                </button>
               </div>
             </div>
             
@@ -147,7 +171,12 @@ function App() {
               <div className="p-8">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Training Programs</h3>
                 <p className="text-gray-600 mb-4">Hands-on experience for veterans and individuals with disabilities, creating pathways to tech careers.</p>
-                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Join Program →</a>
+                <button 
+                  onClick={openPartnerForm}
+                  className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]"
+                >
+                  Join Program →
+                </button>
               </div>
             </div>
             
@@ -162,7 +191,12 @@ function App() {
               <div className="p-8">
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">Partnerships</h3>
                 <p className="text-gray-600 mb-4">Collaborating with educational institutions and nonprofits to expand our reach and impact.</p>
-                <a href="#" className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]">Partner With Us →</a>
+                <button 
+                  onClick={openPartnerForm}
+                  className="text-[#23C0D8] font-semibold hover:text-[#4FCDE0]"
+                >
+                  Partner With Us →
+                </button>
               </div>
             </div>
           </div>
@@ -177,7 +211,10 @@ function App() {
             <p className="text-gray-600 text-lg mb-8">
               Join our mission to make robotics education and careers accessible to everyone.
             </p>
-            <button className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center">
+            <button 
+              onClick={openSignUpForm}
+              className="bg-[#23C0D8] text-white px-8 py-4 rounded-md text-lg font-semibold hover:bg-[#4FCDE0] transition-colors inline-flex items-center"
+            >
               Get Started Today
               <ArrowRight className="ml-2 h-5 w-5" />
             </button>
@@ -199,7 +236,7 @@ function App() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Services</h3>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-white">Field Testing</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white">Robotics Education</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white">Training Programs</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white">Resources</a></li>
               </ul>
@@ -226,6 +263,10 @@ function App() {
           </div>
         </div>
       </footer>
+
+      <SignUpForm isOpen={isSignUpFormOpen} onClose={() => setIsSignUpFormOpen(false)} />
+      <PartnerForm isOpen={isPartnerFormOpen} onClose={() => setIsPartnerFormOpen(false)} />
+      <StoryMessage isOpen={isStoryMessageOpen} onClose={() => setIsStoryMessageOpen(false)} />
     </div>
   );
 }
