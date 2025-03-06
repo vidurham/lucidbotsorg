@@ -230,40 +230,6 @@ function App() {
         </div>
       </div>
 
-      {/* Building the Future Section */}
-      <div className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Building the Future</h2>
-            <div className="w-32 h-1 bg-[#23C0D8] mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-            <div className="space-y-8">
-              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Innovative Solutions</h3>
-                <p className="text-gray-700">Creating cutting-edge robotics technology that solves real-world challenges.</p>
-              </div>
-              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Social Impact</h3>
-                <p className="text-gray-700">Empowering communities through education and workforce development.</p>
-              </div>
-              <div className="bg-[#D3F2F7] p-8 rounded-xl shadow-lg">
-                <h3 className="text-2xl font-semibold mb-4 text-[#142933]">Sustainable Growth</h3>
-                <p className="text-gray-700">Building a foundation for long-term success and community benefit.</p>
-              </div>
-            </div>
-            <div className="rounded-xl overflow-hidden shadow-xl bg-[#142933] p-8">
-              <img 
-                src={PDQuoteImage}
-                alt="Peter Drucker Quote"
-                className="w-full"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* CTA Section */}
       <div className="bg-[#D3F2F7] py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
