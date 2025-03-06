@@ -4,7 +4,7 @@ import LucidBotsLogo from './assets/LucidBots_Colored_Logo_Full.png';
 import EducationImage from './assets/education.jpg';
 import InnovationImage from './assets/innovation2.jpg';
 import ImpactImage from './assets/andrewteach.png';
-import AndrewImage from './assets/andrewq.jpg';
+import AndrewImage from './assets/andrewquote.png';
 import PDQuoteImage from './assets/pdquote.jpg';
 import { SignUpForm } from './components/SignUpForm';
 import { PartnerForm } from './components/PartnerForm';
