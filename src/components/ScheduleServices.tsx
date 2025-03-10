@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import LucidBotsLogo from '../assets/LucidBots_Colored_Logo_Full.png';
@@ -14,6 +14,10 @@ import WarehouseImage from '../assets/warehouse.jpg';
 import logo from '../assets/logo.png';
 
 export function ScheduleServices() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}

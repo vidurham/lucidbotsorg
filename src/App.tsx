@@ -134,7 +134,7 @@ function App() {
           )}
 
           {/* Schedule Service Section */}
-          <div className="bg-white py-24">
+          <div className="bg-[#D3F2F7] py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold text-[#142933] mb-6">Schedule a Service</h2>
@@ -143,6 +143,9 @@ function App() {
                 <Link 
                   to="/services"
                   className="inline-flex items-center bg-[#23C0D8] text-white px-8 py-4 rounded-md text-xl font-semibold hover:bg-[#4FCDE0] transition-colors"
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   <Calendar className="mr-2 h-6 w-6" />
                   Schedule Now
@@ -153,7 +156,7 @@ function App() {
           </div>
 
           {/* The Vision Section */}
-          <div className="bg-[#D3F2F7] py-24">
+          <div className="bg-white py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
                 <h2 className="text-5xl md:text-6xl font-bold text-[#142933] mb-6">The Vision</h2>
@@ -182,11 +185,11 @@ function App() {
           </div>
 
           {/* Services Section */}
-          <div className="bg-[#142933] py-24">
+          <div className="bg-[#D3F2F7] py-24">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Our Services</h2>
-                <p className="mt-4 text-xl text-[#D3F2F7]">Real-world robotics meets social impact</p>
+                <h2 className="text-4xl md:text-5xl font-bold text-[#142933] mb-4">Our Services</h2>
+                <p className="mt-4 text-xl text-[#142933]">Real-world robotics meets social impact</p>
                 <div className="w-32 h-1 bg-[#23C0D8] mx-auto mt-6"></div>
               </div>
 
@@ -255,11 +258,11 @@ function App() {
           </div>
 
           {/* CTA Section */}
-          <div className="bg-[#D3F2F7] py-16">
+          <div className="bg-[#142933] py-16">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-3xl">
-                <h2 className="text-3xl font-bold text-[#142933] mb-4">Ready to Make an Impact?</h2>
-                <p className="text-gray-600 text-lg mb-8">
+                <h2 className="text-3xl font-bold text-white mb-4">Ready to Make an Impact?</h2>
+                <p className="text-[#D3F2F7] text-lg mb-8">
                   Join our mission to make robotics education and careers accessible to everyone.
                 </p>
                 <button 
