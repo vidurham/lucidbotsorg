@@ -18,6 +18,29 @@ export function ScheduleServices() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    // Add stylesheet
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://d3ey4dbjkt2f6s.cloudfront.net/assets/external/work_request_embed.css';
+    link.media = 'screen';
+    document.head.appendChild(link);
+
+    // Add script
+    const script = document.createElement('script');
+    script.src = 'https://d3ey4dbjkt2f6s.cloudfront.net/assets/static_link/work_request_embed_snippet.js';
+    script.async = true;
+    script.setAttribute('clienthub_id', 'b698e528-3015-4f35-9ea0-97ccf6a231af');
+    script.setAttribute('form_url', 'https://clienthub.getjobber.com/client_hubs/b698e528-3015-4f35-9ea0-97ccf6a231af/public/work_request/embedded_work_request_form');
+    document.body.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []); // Empty dependency array means this runs once on mount
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -307,13 +330,7 @@ export function ScheduleServices() {
                 <h3 className="text-2xl font-semibold">Quick Quote Form</h3>
                 <p className="text-[#23C0D8]">Takes less than 2 minutes!</p>
               </div>
-              <iframe 
-                src="https://pub.quoteiq.io/customer_form/gP2LMu4OAkfHQOmpkeNXBg7gnSn1-pDktEH53gJD30WAtsJBn" 
-                className="w-full h-[800px] border-0"
-                title="Get a Quote"
-                allow="accelerometer; autoplay; camera; encrypted-media; geolocation; gyroscope; microphone; midi"
-                aria-label="Quote request form"
-              />
+              <div id="b698e528-3015-4f35-9ea0-97ccf6a231af"></div>
             </div>
             <div className="mt-8 text-center">
               <p className="text-gray-600">
